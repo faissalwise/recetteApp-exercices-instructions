@@ -51,7 +51,7 @@ import { Plat } from '../shared/plat';
 
 export class MenuComponent implements OnInit {
 
-  dishes: Plat[] = [
+  plats: Plat[] = [
                          {
                            name:'Uthappizza',
                            image: '/assets/images/uthappizza.png',
