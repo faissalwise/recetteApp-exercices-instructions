@@ -108,6 +108,8 @@ import { MatGridListModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material';
 import { MatToolbarModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material';
 
 . . . 
 
@@ -127,7 +129,9 @@ import 'hammerjs';
     MatButtonModule,
     MatToolbarModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule;
+    MatDialogModule,
+    MatCheckboxModule,
     
   ], 
     
