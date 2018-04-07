@@ -101,10 +101,13 @@ Updating AppModule
 Then, you need to import the Angular Animations Module, Angular Material Module, Flex Layout Module and hammerjs into your root module (src/app/app.module.ts) as follows:
 ```javascript
 . . . 
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from '@angular/material'; 
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { FlexLayoutModule }  from '@angular/flex-layout';
+import { MatListModule, MatInputModule } from '@angular/material';
+import { MatGridListModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material';
+import { MatToolbarModule } from '@angular/material';
 
 . . . 
 
@@ -117,10 +120,13 @@ import 'hammerjs';
   imports: [ 
     
     . . .,
-    
-    BrowserAnimationsModule,
-    MaterialModule,
-    FlexLayoutModule
+    MatGridListModule,
+    FlexLayoutModule,
+    MatListModule,
+    MatCardModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatInputModule
     
   ], 
     
