@@ -247,4 +247,93 @@ Also, update the menu.component.ts file as follows to move the details of the pl
  
  }
  ```
+### Exercice Fin module
 
+Task 1
+
+In this task you will be adding a new platdetail component to your Angular application and include the component into the menu component's template so that the details of a specific plat are displayed there:
+
+- Use Angular CLI to create a new component named platdetail,
+- Replace the card showing the selected dish in menu component's template with the platdetail component, and
+- Update the template of the platdetail component with the following code:
+
+```javascript
+<div class="container"
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    fxLayoutAlign.gt-mat="space-around center"
+    fxLayoutGap="10px" 
+    fxLayoutGap.xs="0">
+
+  <div fxFlex="40" *ngIf="plat" >
+    <p>Afficher le detail ici</p>
+ </div>
+
+  <div fxFlex="20" *ngIf="plat">
+      <p>Afficher les commentaires ici</p>
+ </div>
+
+</div>
+ ```
+ Task 2
+
+In this task you will be adding a card component to the platdetail template to display the details of the plat given above:
+
+Add a new constant to the platdetail.component.ts file named PLAT as follows, and initialize it to the JavaScript object given below that contains the details of the plat and comments about the plat:
+```javascript
+const PLAT = {
+  name: 'Uthappizza',
+  image: '/assets/images/uthappizza.png',
+  category: 'mains',
+  label: 'Hot',
+  price: '4.99',
+  description: 'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.',
+  comments: [
+    {
+      rating: 5,
+      comment: "Imagine all the eatables, living in conFusion!",
+      author: "John Lemon",
+      date: "2012-10-16T17:57:28.556094Z"
+    },
+    {
+      rating: 4,
+      comment: "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
+      author: "Paul McVites",
+      date: "2014-09-05T17:57:28.556094Z"
+    },
+    {
+      rating: 3,
+      comment: "Eat it, just eat it!",
+      author: "Michael Jaikishan",
+      date: "2015-02-13T17:57:28.556094Z"
+    },
+    {
+      rating: 4,
+      comment: "Ultimate, Reaching for the stars!",
+      author: "Ringo Starry",
+      date: "2013-12-02T17:57:28.556094Z"
+    },
+    {
+      rating: 2,
+      comment: "It's your birthday, we're gonna party!",
+      author: "25 Cent",
+      date: "2011-12-02T17:57:28.556094Z"
+    }
+  ]
+};
+```
+Now introduce a new variable in the platdetail.component.ts file in the platdetail class called dish and set it equal to the PLAT constant above:
+```javascript
+plat = PLAT;
+```
+The Angular material card component should be used to display the details of the plat as shown above. Please remember to use the Angular "uppercase" pipe on the name displayed in the card title. Also apply the *ngIf="plat" structural directive to both the <mat-card>.
+
+Task 3
+
+In this task you will use the comments that are included in the plat object above to display a list of the comments.
+
+This task involves the following steps:
+
+Use the Angular material list to display the list of comments as shown below. Also apply the *ngIf="plat" structural directive to both the <md-list> that displays the list of comments .
+Display the date of the comment by processing it through the Angular built-in date pipe.
