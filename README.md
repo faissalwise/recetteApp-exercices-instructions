@@ -221,7 +221,7 @@ Open menu.component.html and update its content as follows:
 
 </div>
 ```
-Also, update the menu.component.ts file as follows to move the details of the dishes into a constant
+Also, update the menu.component.ts file as follows to move the details of the plats into a constant
 ```javascript
  . . .
  
