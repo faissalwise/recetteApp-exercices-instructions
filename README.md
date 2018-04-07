@@ -160,17 +160,11 @@ Next, update the menu.component.html template as follows:
 ```
 Add the following CSS class to styles.scss file:
 ```javascript
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 .container {
     margin: 20px;
     display:flex;
 }
-```
-Add the following styles to styles.scss file:
-
-```javascript
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-
-// some basic resets 
 
 body { 
   padding: 0; 
@@ -178,7 +172,9 @@ body {
   font-family: Roboto, sans-serif; 
   
 }
+
 ```
+
 
 
 
