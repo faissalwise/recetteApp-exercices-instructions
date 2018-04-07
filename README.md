@@ -126,7 +126,8 @@ import 'hammerjs';
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
-    MatInputModule
+    MatInputModule,
+    BrowserAnimationsModule
     
   ], 
     
