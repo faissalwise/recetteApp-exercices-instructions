@@ -174,8 +174,72 @@ body {
 }
 
 ```
+Updating the Menu Template
 
+Open menu.component.html and update its content as follows:
+```javascript
+<<div class="container"
+     fxLayout="column"
+     fxLayoutGap="10px">
 
+  <div fxFlex>
+    <div>
+      <h3>Menu</h3>
+      <hr>
+    </div>
+  </div>
 
+  <div fxFlex>
+    <mat-grid-list cols="2" rowHeight="200px">
+      <mat-grid-tile *ngFor="let plat of plats">
+        <img height="200px" src={{plat.image}} alt={{plat.name}}>
+        <mat-grid-tile-footer>
+          <h1 mat-line>{{plat.name | uppercase}}</h1>
+        </mat-grid-tile-footer>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
 
+  <div fxFlex *ngIf="selectedPlat">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h3>{{selectedPlat.name | uppercase}}</h3>
+        </mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src={{selectedPlat.image}} alt={{selectedPlat.name}}>
+      <mat-card-content>
+        <p>{{selectedPlat.description}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+</div>
+```
+Also, update the menu.component.ts file as follows to move the details of the dishes into a constant
+```javascript
+ . . .
+ 
+ const PLATS: Plat[] = [
+ . . .
+ 
+ ];
+ 
+ . . .
+ 
+ export class MenuComponent implements OnInit {
+
+  plats = PLATS;
+
+  selectedPlat = PLATS[0];
+
+ . . .
+ 
+ }
+ ```
 
