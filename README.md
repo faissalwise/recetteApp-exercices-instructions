@@ -254,7 +254,7 @@ Task 1
 In this task you will be adding a new platdetail component to your Angular application and include the component into the menu component's template so that the details of a specific plat are displayed there:
 
 - Use Angular CLI to create a new component named platdetail,
-- Replace the card showing the selected dish in menu component's template with the platdetail component, and
+- Replace the card showing the selected plat in menu component's template with the platdetail component, and
 - Update the template of the platdetail component with the following code:
 
 ```javascript
@@ -323,7 +323,8 @@ const PLAT = {
   ]
 };
 ```
-Now introduce a new variable in the platdetail.component.ts file in the platdetail class called dish and set it equal to the PLAT constant above:
+Now introduce a new variable in the platdetail.component.ts file in the platdetail class called plat
+and set it equal to the PLAT constant above:
 ```javascript
 plat = PLAT;
 ```
