@@ -32,7 +32,7 @@ Next, open app.component.html file and add the following after the toolbar:
 ```
 ### Creating the Menu
 
-Next, create a folder named shared under the src/app folder. To this folder, add a file named plat.ts with the following code:
+Next, create a folder named shared under the src/app/shared folder. To this folder, add a file named plat.ts with the following code:
 ```javascript
 export class Plat {
     name: string;
