@@ -338,3 +338,253 @@ This task involves the following steps:
 
 Use the Angular material list to display the list of comments as shown below. Also apply the *ngIf="plat" structural directive to both the <md-list> that displays the list of comments .
 Display the date of the comment by processing it through the Angular built-in date pipe.
+
+### Data binding
+
+Refactoring the Code :
+
+First, create a new class named Comment in a file named comment.ts in the shared folder and include the following in it:
+
+```javascript
+export class Comment {
+    rating: number;
+    comment: string;
+    author: string;
+    date: string;
+}
+```
+Then update the plat class to allow a plat to have an array of comments as follows:
+
+import { Comment } from './comment';
+
+```javascript
+export class Plat {
+    name: string;
+    image: string;
+    category: string;
+    label: string;
+    price: string;
+    description: string;
+    comments: Comment[];
+}
+```
+Then create a new file named plat.ts in the shared folder to now export the JavaScript object array of plats:
+
+
+```javascript
+import { Plat } from './plat';
+
+export const PLATS: Plat[] = [
+    {
+        name: 'Uthappizza',
+        image: '/assets/images/uthappizza.png',
+        category: 'mains',
+        label: 'Hot',
+        price: '4.99',
+        description: 'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.',
+        comments: [
+            {
+                rating: 5,
+                comment: "Imagine all the eatables, living in conFusion!",
+                author: "John Lemon",
+                date: "2012-10-16T17:57:28.556094Z"
+            },
+            {
+                rating: 4,
+                comment: "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
+                author: "Paul McVites",
+                date: "2014-09-05T17:57:28.556094Z"
+            },
+            {
+                rating: 3,
+                comment: "Eat it, just eat it!",
+                author: "Michael Jaikishan",
+                date: "2015-02-13T17:57:28.556094Z"
+            },
+            {
+                rating: 4,
+                comment: "Ultimate, Reaching for the stars!",
+                author: "Ringo Starry",
+                date: "2013-12-02T17:57:28.556094Z"
+            },
+            {
+                rating: 2,
+                comment: "It's your birthday, we're gonna party!",
+                author: "25 Cent",
+                date: "2011-12-02T17:57:28.556094Z"
+            }
+        ]
+    },
+    {
+        name: 'Zucchipakoda',
+        image: '/assets/images/zucchipakoda.png',
+        category: 'appetizer',
+        label: '',
+        price: '1.99',
+        description: 'Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce',
+        comments: [
+            {
+                rating: 5,
+                comment: "Imagine all the eatables, living in conFusion!",
+                author: "John Lemon",
+                date: "2012-10-16T17:57:28.556094Z"
+            },
+            {
+                rating: 4,
+                comment: "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
+                author: "Paul McVites",
+                date: "2014-09-05T17:57:28.556094Z"
+            },
+            {
+                rating: 3,
+                comment: "Eat it, just eat it!",
+                author: "Michael Jaikishan",
+                date: "2015-02-13T17:57:28.556094Z"
+            },
+            {
+                rating: 4,
+                comment: "Ultimate, Reaching for the stars!",
+                author: "Ringo Starry",
+                date: "2013-12-02T17:57:28.556094Z"
+            },
+            {
+                rating: 2,
+                comment: "It's your birthday, we're gonna party!",
+                author: "25 Cent",
+                date: "2011-12-02T17:57:28.556094Z"
+            }
+        ]
+    },
+    {
+        name: 'Vadonut',
+        image: '/assets/images/vadonut.png',
+        category: 'appetizer',
+        label: 'New',
+        price: '1.99',
+        description: 'A quintessential ConFusion experience, is it a vada or is it a donut?',
+        comments: [
+            {
+                rating: 5,
+                comment: "Imagine all the eatables, living in conFusion!",
+                author: "John Lemon",
+                date: "2012-10-16T17:57:28.556094Z"
+            },
+            {
+                rating: 4,
+                comment: "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
+                author: "Paul McVites",
+                date: "2014-09-05T17:57:28.556094Z"
+            },
+            {
+                rating: 3,
+                comment: "Eat it, just eat it!",
+                author: "Michael Jaikishan",
+                date: "2015-02-13T17:57:28.556094Z"
+            },
+            {
+                rating: 4,
+                comment: "Ultimate, Reaching for the stars!",
+                author: "Ringo Starry",
+                date: "2013-12-02T17:57:28.556094Z"
+            },
+            {
+                rating: 2,
+                comment: "It's your birthday, we're gonna party!",
+                author: "25 Cent",
+                date: "2011-12-02T17:57:28.556094Z"
+            }
+        ]
+    },
+    {
+        name: 'ElaiCheese Cake',
+        image: '/assets/images/elaicheesecake.png',
+        category: 'dessert',
+        label: '',
+        price: '2.99',
+        description: 'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms',
+        comments: [
+            {
+                rating: 5,
+                comment: "Imagine all the eatables, living in conFusion!",
+                author: "John Lemon",
+                date: "2012-10-16T17:57:28.556094Z"
+            },
+            {
+                rating: 4,
+                comment: "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
+                author: "Paul McVites",
+                date: "2014-09-05T17:57:28.556094Z"
+            },
+            {
+                rating: 3,
+                comment: "Eat it, just eat it!",
+                author: "Michael Jaikishan",
+                date: "2015-02-13T17:57:28.556094Z"
+            },
+            {
+                rating: 4,
+                comment: "Ultimate, Reaching for the stars!",
+                author: "Ringo Starry",
+                date: "2013-12-02T17:57:28.556094Z"
+            },
+            {
+                rating: 2,
+                comment: "It's your birthday, we're gonna party!",
+                author: "25 Cent",
+                date: "2011-12-02T17:57:28.556094Z"
+            }
+        ]
+    }
+];
+```
+Updating the Menu Component:
+
+Open menu.component.ts file and update its content, first by deleting the dishes constant and then make the following changes:
+
+```javascript
+import { Component, OnInit } from '@angular/core';
+import { Plat } from '../shared/plat';
+import { PLATS } from '../shared/plats';
+
+. . .
+
+export class MenuComponent implements OnInit {
+
+  plats = PLATS;
+
+  selectedPlat: Plat;
+
+. . .
+
+  onSelect(dish: Dish) {
+    this.selectedPlat = plat;
+  }
+
+}
+```
+Then update the menu.component.html file as follows:
+
+```javascript
+. . .
+
+      <md-grid-tile *ngFor="let plat of plats" (click) = "onSelect(plat)">
+        . . .
+        
+  <app-detail-plat [plat] = "selectedPlat"></app-detail-plat>
+        
+. . .
+```
+Open detail-plat.component.ts and update its contents as follows :
+```javascript
+import { Component, OnInit, Input } from '@angular/core';
+import { Plat } from '../shared/plat';
+
+. . .
+
+export class DetailPlatComponent implements OnInit {
+
+  @Input()
+  dish: Dish;
+
+. . .
+```
