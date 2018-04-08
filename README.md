@@ -588,3 +588,35 @@ export class DetailPlatComponent implements OnInit {
 
 . . .
 ```
+Adding a Service 
+
+Create a folder named services in the src/app folder.
+```javascript
+ng generate service services/plat
+```
+Open plat.service.ts and update its contents and add the service to the app.module.ts:
+```javascript
+import { Injectable } from '@angular/core';
+import { Plat } from '../shared/plat';
+import { PLATS } from '../shared/plats';
+
+@Injectable()
+export class PlatService {
+
+  constructor() { }
+
+  getPlats(): Plat[] {
+    return PLATS;
+  }
+}
+```
+Using the Service
+Now update menu.component.ts file to make use of the service as follows:
+
+```javascript
+constructor(private platService: PlatService) { }
+  
+  ngOnInit() {
+    this.plats = this.platService.getPlats();
+  }
+```
