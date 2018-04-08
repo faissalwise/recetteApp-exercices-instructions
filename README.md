@@ -807,3 +807,55 @@ Now update the app.component.html file to include the header and footer as follo
 <app-menu></app-menu>
 <app-footer></app-footer>
 ```
+### Angular Routing
+
+Add three new components to your Angular :about,home,contact.
+
+Add a new module named app-routing to your application as follows. This will create a new module file named app-routing.module.ts in the app-routing folder.
+
+```javascript
+ng generate module app-routing
+```
+Next create a new file named routes.ts in the app-routing folder and update it as follows:
+```javascript
+import { Routes } from '@angular/router';
+
+import { MenuComponent } from '../menu/menu.component';
+import { DetailPlatComponent } from '../detail-plat/detail-plat.component';
+import { HomeComponent } from '../home/home.component';
+import { AboutComponent } from '../about/about.component';
+import { ContactComponent } from '../contact/contact.component';
+
+export const routes: Routes = [
+  { path: 'home',  component: HomeComponent },
+  { path: 'menu',     component: MenuComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
+];
+```
+Update the app-routing.module.ts file to make use of the routes defined above as follows and don't forget to add it to app.module.ts.
+
+```javascript
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+
+import { routes } from './routes';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes)
+  ],
+  exports: [ RouterModule ],
+  declarations: []
+})
+export class AppRoutingModule { }
+```
+Next update the app.component.html file :
+```javascript
+<app-header></app-header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+```
+
+
