@@ -620,3 +620,17 @@ constructor(private platService: PlatService) { }
     this.plats = this.platService.getPlats();
   }
 ```
+### Header and Footer
+
+First use NPM to fetch Font Awesome to the project by typing the following at the prompt:
+```javascript
+npm install font-awesome --save
+```
+Then, open the .angular-cli.json file in the project's root folder and update it as follows:
+```javascript
+"styles": [
+        "styles.scss",
+        "../node_modules/font-awesome/scss/font-awesome.scss"
+      ],
+```
+Create two new components named header and footer.
