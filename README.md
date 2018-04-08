@@ -661,7 +661,7 @@ Update the footer's template as follows:
       <div fxFlex="50">
         <h4>Our Address</h4>
         <address style="text-size: 80%">
-          121, Clear Water Bay Road<br> Clear Water Bay, Kowloon<br> HONG KONG<br>
+          121, Clear Water Bay Road<br> Clear Water Bay, Kowloon<br> Rabat<br>
           <i class="fa fa-phone"></i>: +852 1234 5678<br>
           <i class="fa fa-fax"></i>: +852 8765 4321<br>
           <i class="fa fa-envelope"></i>:
@@ -733,7 +733,7 @@ Update the header's template as follows:
   
     <div fxFlex fxFlex.gt-sm="50%">
       <h1>Restaurant recette App</h1>
-      <p>We take inspiration from the World's best cuisines, and create a unique fusion experience</p>
+      <p>We take inspiration from the World best cuisines, and create a unique fusion experience</p>
     </div>
     <div fxFlex fxFlex.gt-sm="20%">
       <img src="/assets/images/logo.png" alt="Logo">
