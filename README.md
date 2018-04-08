@@ -355,9 +355,9 @@ export class Comment {
 ```
 Then update the plat class to allow a plat to have an array of comments as follows:
 
+```javascript
 import { Comment } from './comment';
 
-```javascript
 export class Plat {
     name: string;
     image: string;
@@ -368,7 +368,7 @@ export class Plat {
     comments: Comment[];
 }
 ```
-Then create a new file named plat.ts in the shared folder to now export the JavaScript object array of plats:
+Then create a new file named plats.ts in the shared folder to now export the JavaScript object array of plats:
 
 
 ```javascript
