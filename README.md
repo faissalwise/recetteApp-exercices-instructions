@@ -539,7 +539,7 @@ export const PLATS: Plat[] = [
 ```
 Updating the Menu Component:
 
-Open menu.component.ts file and update its content, first by deleting the dishes constant and then make the following changes:
+Open menu.component.ts file and update its content, first by deleting the plats constant and then make the following changes:
 
 ```javascript
 import { Component, OnInit } from '@angular/core';
@@ -556,7 +556,7 @@ export class MenuComponent implements OnInit {
 
 . . .
 
-  onSelect(dish: Dish) {
+  onSelect(plat: Plat) {
     this.selectedPlat = plat;
   }
 
@@ -584,7 +584,7 @@ import { Plat } from '../shared/plat';
 export class DetailPlatComponent implements OnInit {
 
   @Input()
-  dish: Dish;
+  plat: Plat;
 
 . . .
 ```
