@@ -868,3 +868,100 @@ Finally update the toolbar in the header.component.html file as follows:
       
 </mat-toolbar>
 ```
+Update each of the links in the toolbar with the following addition to the link:
+
+```javascript
+<a . . . routerLinkActive="active"><span . . . ></span> Home</a>
+```
+Now add the following scss class to header.component.scss:
+```javascript
+$background-moredark: #4527A0;
+. . .
+.active {
+    background: $background-moredark;
+}
+```
+update plat.ts file
+```javascript
+import { Comment } from './comment';
+
+export class Plat {
+    id: number;
+    name: string;
+    image: string;
+    category: string;
+    label: string;
+    price: string;
+    featured: boolean;
+    description: string;
+    comments: Comment[];
+}
+```
+Now that we added the id and featured property to plat, update the PLATS constant in plats.ts
+
+Now update the dish service to return a specific plat, and a featured plat as follows:
+```javascript
+getPlat(id: number): Plat {
+    return PLATS.filter((plat) => (plat.id === id))[0];
+  }
+
+  getFeaturedPlat(): Plat {
+    return PLATS.filter((plat) => plat.featured)[0];
+  }
+```
+Next add promotion.ts file to the shared folder
+
+```javascript
+export class Promotion {
+    id: number;
+    name: string;
+    image: string;
+    label: string;
+    price: string;
+    featured: boolean;
+    description: string;
+}
+```
+Then, add promotions.ts file to the shared folder and update its contents as follows:
+
+```javascript
+import { Promotion } from './promotion';
+
+export const PROMOTIONS: Promotion[] = [
+    {
+      id: 0,
+      name: 'Weekend Grand Buffet',
+      image: '/assets/images/buffet.png',
+      label: 'New',
+      price: '19.99',
+      featured: true,
+      description: 'Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person'
+    }
+  ];
+```
+ Add a new service named "promotion" to the services folder with :
+ ```javascript
+ getPromotions(): Promotion[] {
+    return PROMOTIONS;
+  }
+
+  getPromotion(id: number): Promotion {
+    return PROMOTIONS.filter((promo) => (promo.id === id))[0];
+  }
+
+  getFeaturedPromotion(): Promotion {
+    return PROMOTIONS.filter((promotion) => promotion.featured)[0];
+  }
+ ```
+ update the home.component.ts file to fetch and provide the featured plat and promotion for the view:
+ ```javascript
+ promotion: Promotion;
+
+  constructor(private platsService: PlatService,
+    private promotionservice: PromotionService) { }
+
+  ngOnInit() {
+    this.plat = this.platService.getFeaturedPlat();
+    this.promotion = this.promotionservice.getFeaturedPromotion();
+  }
+  ``` 
