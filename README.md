@@ -899,7 +899,7 @@ export class Plat {
 ```
 Now that we added the id and featured property to plat, update the PLATS constant in plats.ts
 
-Now update the dish service to return a specific plat, and a featured plat as follows:
+Now update the plat service to return a specific plat, and a featured plat as follows:
 ```javascript
 getPlat(id: number): Plat {
     return PLATS.filter((plat) => (plat.id === id))[0];
