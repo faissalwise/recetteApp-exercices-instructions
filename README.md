@@ -965,3 +965,36 @@ export const PROMOTIONS: Promotion[] = [
     this.promotion = this.promotionservice.getFeaturedPromotion();
   }
   ``` 
+Open the routes.ts and add the following route to it:
+```javascript
+{ path: 'detailPlat/:id',     component: DetailPlatComponent }
+ ``` 
+ Open menu.component.html and update it as follows. Also remove the <app-detail-plat> from the template.
+ ```javascript
+ <mat-grid-tile *ngFor="let plat of plats" [routerLink]="['/detailPlat', plat.id]">
+ ``` 
+ Open detail-plat.component.ts and update it as follows:
+  ```javascript
+  plat: Plat;
+
+  constructor(private platService: PlatService,
+    private route: ActivatedRoute,
+    private location: Location) { }
+
+  ngOnInit() {
+    let id = +this.route.snapshot.params['id'];
+    this.plat = this.platService.getPlat(id);
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
+ ``` 
+ open detail-plat.component.html and update it :
+ ```javascript
+  <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+        <button md-button (click)="goBack()">BACK</button>
+  </mat-card-actions>
+ ```
