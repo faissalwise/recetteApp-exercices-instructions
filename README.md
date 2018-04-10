@@ -1072,3 +1072,32 @@ Then, open login.component.ts file and update its contents as follows:
     this.dialogRef.close();
   }
 ```
+Open login.component.html file aand update its contents as follows:
+```javascript
+<p>{{ user | json }}</p>
+
+<form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
+
+  <mat-dialog-content>
+    <p>
+      <mat-input-container  dividerColor="{{username.invalid && !username.pristine ? 'warn' : 'primary'}}">
+        <input matInput placeholder="Username" type="text" [(ngModel)]="user.username" name="username" #username="ngModel" required>
+        <mat-hint>
+            <span [hidden]="username.pristine">
+            <span [hidden]="!username.errors?.required">username is required</span>
+            </span>
+          </mat-hint>
+      </mat-input-container>
+      <mat-input-container>
+        <input matInput placeholder="Password" type="password" [(ngModel)]="user.password" name="password" #password="ngModel" required>
+      </mat-input-container>
+      <mat-checkbox [(ngModel)]="user.remember" name="remember">Remember Me</mat-checkbox>
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <span class="flex-spacer"></span>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button type="submit" mat-button class="background-primary text-floral-white"  [disabled]="loginForm.form.invalid">Login</button>
+  </mat-dialog-actions>
+</form>
+```
