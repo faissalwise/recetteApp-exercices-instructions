@@ -425,7 +425,7 @@ export const PLATS: Plat[] = [
         comments: [
             {
                 rating: 5,
-                comment: "Imagine all the eatables, living in conFusion!",
+                comment: "Imagine all the eatables!",
                 author: "John Lemon",
                 date: "2012-10-16T17:57:28.556094Z"
             },
@@ -998,3 +998,77 @@ Open the routes.ts and add the following route to it:
         <button md-button (click)="goBack()">BACK</button>
   </mat-card-actions>
  ```
+Angular Forms :
+
+Add a link to the toolbar in the header component, which when clicked will open a Login form in a dialog view:
+
+```javascript
+<a mat-button (click)="openLoginForm()"><span class="fa fa-sign-in fa-lg"></span> Login</a>
+```
+create an Angular component named LoginComponent
+
+Add the FormsModule and the LoginComponent as follows:
+
+```javascript
+entryComponents: [
+        LoginComponent
+  ],
+  imports: [ 
+    . . . 
+    
+    FormsModule 
+  ],
+```
+open header.component.ts and update it as follows:
+```javascript
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { LoginComponent } from '../login/login.component';
+
+constructor(public dialog: MatDialog ) { }
+
+  ngOnInit() {
+  }
+
+  openLoginForm() {
+    this.dialog.open(LoginComponent, {width: '500px', height: '450px'});
+  }
+
+```
+Open login.component.html file and add in the form as follows:
+```javascript
+<p>{{ user | json }}</p>
+
+<form novalidate (ngSubmit)="onSubmit()">
+
+  <mat-dialog-content>
+    <p>
+      <mat-input-container>
+        <input matInput placeholder="Username" type="text" [(ngModel)]="user.username" name="username" required>
+      </mat-input-container>
+      <mat-input-container>
+        <input matInput placeholder="Password" type="password" [(ngModel)]="user.password" name="password" required>
+      </mat-input-container>
+      <mat-checkbox [(ngModel)]="user.remember" name="remember">Remember Me</mat-checkbox>
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <span class="flex-spacer"></span>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button type="submit" mat-button class="background-primary text-floral-white" >Login</button>
+  </mat-dialog-actions>
+</form>
+```
+Then, open login.component.ts file and update its contents as follows:
+```javascript
+ user = {remember: false};
+
+  constructor(public dialogRef: MatDialogRef<LoginComponent>) { }
+
+  ngOnInit() {
+  }
+
+  onSubmit() {
+    console.log("User: ", this.user);
+    this.dialogRef.close();
+  }
+```
