@@ -1125,7 +1125,7 @@ export class PlatService {
   }
 
   getFeaturedPlat(): Observable<Plat> {
-    return Observable.of(PLATS.filter((dish) => dish.featured)[0]).delay(20);
+    return Observable.of(PLATS.filter((plat) => plat.featured)[0]).delay(20);
   }
 }
 ```
@@ -1154,8 +1154,8 @@ next: number;
       .subscribe(plat => { this.plat = plat; this.setPrevNext(plat.id); });
   }
 
-  setPrevNext(dishId: number) {
-    let index = this.platIds.indexOf(dishId);
+  setPrevNext(platId: number) {
+    let index = this.platIds.indexOf(platId);
     this.prev = this.platIds[(this.platIds.length + index - 1)%this.platIds.length];
     this.next = this.platIds[(this.platIds.length + index + 1)%this.platIds.length];
   }
