@@ -1350,4 +1350,13 @@ Update menu.component.html file as follows:
       <h4>{{errMess}}</h4>
     </div>
 ```
+### Building and Deploying the Angular Application
 
+You will note that the build process indicates an error in the Login component. Update the login.component.ts file as follows:
+```javascript
+  user = {username: '', password: '', remember: false};
+```
+To build the distribution folder containing your angular application, type the following at the prompt:
+```javascript
+ng build --target=production
+```
