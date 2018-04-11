@@ -1175,4 +1175,13 @@ Installing json-server :
 ```javascript
 npm install json-server -g
 ```
+Configuring the Server :
+
+At any convenient location on your computer, create a new folder named json-server, and move to this folder.
+Download the db.json file provided above to this folder.
+Move to this folder in your terminal window, and type the following at the command prompt to start the server:
+```javascript
+json-server --watch db.json
+```
+
 
