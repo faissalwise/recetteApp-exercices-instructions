@@ -1182,6 +1182,99 @@ Download the db.json file provided above to this folder.
 Move to this folder in your terminal window, and type the following at the command prompt to start the server:
 ```javascript
 json-server --watch db.json
+json-server --watch db.json -d 2000
+```
+Configuring the Base Server URL :
+
+You need to import the HttpModule in app.module.ts.
+```javascript
+import { HttpModule } from '@angular/http';
+
+@NgModule({
+  
+  . . . 
+  imports: [ 
+    . . . 
+
+    HttpModule 
+  ], 
+  
+  . . .
+
+```
+Create a new file named baseurl.ts in the shared folder and update its contents as follows:
+```javascript
+export const baseURL = 'http://localhost:3000/';
+```
+ import baseURL and update the AppModule's providers property of the @NgModule decorator as follows:
+ ```javascript
+ import { baseURL } from './shared/baseurl';
+. . .
+
+providers: [
+  . . .
+  {provide: 'BaseURL', useValue: baseURL}
+  ]
+```
+Create a new service named ProcessHTTPMsg in the services folder.
+Open process-httpmsg.service.ts and update its contents as follows:
+```javascript
+. . .
+
+import { Observable } from 'rxjs/Observable';
+import { Http, Response } from '@angular/http';
+
+. . .
+
+
+  public extractData(res: Response) {
+    let body = res.json();
+    console.log(body);
+    return body || { };
+  }
+  
+  . . .
+```
+Open plat.service.ts file and update its contents as follows:
+```javascript
+import { Http, Response } from '@angular/http';
+import { baseURL } from '../shared/baseurl';
+import { ProcessHttpmsgService } from './process-httpmsg.service';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+
+ constructor(private http: Http,
+    private processHttpmsgService: ProcessHttpmsgService) { }
+    
+ getPlats(): Observable<Plat[]> {
+    return this.http.get(baseURL + 'plats')
+                    .map(res => { return this.processHttpmsgService.extractData(res); });
+  }
+
+  getPlat(id: number): Observable<Plat> {
+    return  this.http.get(baseURL + 'plats/'+ id)
+                    .map(res => { return this.processHttpmsgService.extractData(res); });
+  }
+
+  getFeaturedPlat(): Observable<Plat> {
+    return this.http.get(baseURL + 'plats?featured=true')
+                    .map(res => { return this.processHttpmsgService.extractData(res)[0]; });
+  }
+
+  getPlatIds(): Observable<number[]> {
+    return this.getPlats()
+      .map(plats => { return plats.map(plat => plat.id) });
+  }   
+
+```
+Open menu.component.ts and update it as follows:
+```javascript
+ import { Component, OnInit, Inject } from '@angular/core';
+ 
+ constructor(private platService: PlatService,@Inject('BaseURL') private BaseURL) { }
 ```
 
-
+Open menu.component.html and update it as follows:
+```javascript
+ <img height="200px" src="{{BaseURL + plat.image}}" alt={{plat.name}}>
+```
