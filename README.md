@@ -1360,3 +1360,5 @@ To build the distribution folder containing your angular application, type the f
 ```javascript
 ng build --target=production
 ```
+Copy the contents of the dist folder to the public folder of your json-server.
+Now your Angular application can be accessed at the link http://localhost:3000/
