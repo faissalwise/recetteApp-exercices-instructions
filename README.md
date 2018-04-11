@@ -1278,3 +1278,76 @@ Open menu.component.html and update it as follows:
 ```javascript
  <img height="200px" src="{{BaseURL + plat.image}}" alt={{plat.name}}>
 ```
+Update process-httpmsg.service.ts to include a function to handle errors as follows:
+```javascript
+. . .
+
+import 'rxjs/add/observable/throw';
+
+
+. . .
+
+
+  public handleError (error: Response | any) {
+    // In a real world app, you might use a remote logging infrastructure
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    console.error(errMsg);
+    return Observable.throw(errMsg);
+  }
+  . . .
+```
+Update plat.service.ts to catch and handle errors as follows:
+```javascript
+. . .
+import 'rxjs/add/operator/catch';
+
+. . .
+  getPlats(): Observable<Plat[]> {
+    return this.http.get(baseURL + 'plats')
+                    .map(res => { return this.processHttpmsgService.extractData(res); })
+                    .catch(error => { return this.processHttpmsgService.handleError(error); });
+  }
+
+  getPlat(id: number): Observable<Plat> {
+    return  this.http.get(baseURL + 'plats/'+ id)
+                    .map(res => { return this.processHttpmsgService.extractData(res); })
+                    .catch(error => { return this.processHttpmsgService.handleError(error); });
+  }
+
+  getFeaturedPlat(): Observable<Plat> {
+    return this.http.get(baseURL + 'plats?featured=true')
+                    .map(res => { return this.processHttpmsgService.extractData(res)[0]; })
+                    .catch(error => { return this.processHttpmsgService.handleError(error); });
+  }
+
+  getPlatIds(): Observable<number[]> {
+    return this.getPlats()
+      .map(plats => { return plats.map(plat => plat.id) })
+      .catch(error => { return Observable.of(error); });
+      
+  }
+ 
+```
+Update menu.component.ts as follows to handle errors:
+```javascript
+this.platService.getPlats().subscribe(plats => this.plats = plats,
+      errmess => this.errMess = <any>errmess);
+```
+Update menu.component.html file as follows:
+```javascript
+<div [hidden]="plats || errMess">
+      <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+    </div>
+    <div *ngIf="errMess">
+      <h2>Error</h2>
+      <h4>{{errMess}}</h4>
+    </div>
+```
+
