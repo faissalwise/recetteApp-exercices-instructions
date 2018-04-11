@@ -1171,4 +1171,8 @@ Update detail-plat.component.html as follows:
        <button mat-button [routerLink]="['/detailPlat', next]"><span class="fa fa-chevron-right fa-lg"></span></button>
 </mat-card-actions>
 ```
+Installing json-server :
+```javascript
+npm install json-server -g
+```
 
