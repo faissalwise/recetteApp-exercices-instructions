@@ -1133,3 +1133,42 @@ Update all the components as follows to subscribe to the observable returned fro
 ```javascript
 this.platService.getPlats().subscribe(plats => this.plats = plats);
 ```
+Update plat.service.ts by adding the following method to the service:
+```javascript
+ getPlatIds(): Observable<number[]> {
+    return Observable.of(PLATS.map(plat => plat.id ));
+  }
+```
+Update the detail-plat.component.ts as follows:
+```javascript
+import 'rxjs/add/operator/switchMap';
+import { Params } from '@angular/router';
+
+prev: number;
+next: number;
+
+ ngOnInit() {
+    this.platService.getPlatIds().subscribe(platIds => this.platIds = platIds);
+    this.route.params
+      .switchMap((params: Params) => this.platService.getPlat(+params['id']))
+      .subscribe(plat => { this.plat = plat; this.setPrevNext(plat.id); });
+  }
+
+  setPrevNext(dishId: number) {
+    let index = this.platIds.indexOf(dishId);
+    this.prev = this.platIds[(this.platIds.length + index - 1)%this.platIds.length];
+    this.next = this.platIds[(this.platIds.length + index + 1)%this.platIds.length];
+  }
+```
+Update detail-plat.component.html as follows:
+```javascript
+<mat-card-actions>
+       <button mat-button [routerLink]="['/detailPlat', prev]"><span class="fa fa-chevron-left fa-lg"></span></button>
+       <button mat-button>LIKE</button>
+       <button mat-button>SHARE</button>
+       <button mat-button (click)="goBack()">BACK</button>
+       <span class="flex-spacer"></span>
+       <button mat-button [routerLink]="['/detailPlat', next]"><span class="fa fa-chevron-right fa-lg"></span></button>
+</mat-card-actions>
+```
+
