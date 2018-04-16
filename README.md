@@ -1362,3 +1362,66 @@ ng build --target=production
 ```
 Copy the contents of the dist folder to the public folder of your json-server.
 Now your Angular application can be accessed at the link http://localhost:3000/
+
+### Angular and REST
+
+First install Ngx-Restangular into your Angular application using NPM as follows:
+```javascript
+npm install --save ngx-restangular
+```
+Add a file named restConfig.ts to the shared folder and update its contents as follows:
+```javascript
+import { baseURL } from './baseurl';
+
+// Function for settting the default restangular configuration
+export function RestangularConfigFactory (RestangularProvider) {
+  RestangularProvider.setBaseUrl(baseURL);
+}
+```
+Open app.module.ts and update it as follows:
+```javascript
+. . .
+import { RestangularModule, Restangular } from 'ngx-restangular';
+import { RestangularConfigFactory } from './shared/restConfig';
+
+. . . 
+
+imports: [
+  . . .
+  RestangularModule.forRoot(RestangularConfigFactory)
+  ]
+  . . .
+```
+Open plat.service.ts and update it as follows to make it use ng2-restangular:
+
+```javascript
+. . .
+import { RestangularModule, Restangular } from 'ngx-restangular';
+
+. . .
+  constructor(private restangular: Restangular,
+              private processHTTPMsg: ProcessHTTPMsg) { }
+  
+    constructor(private restangular: Restangular,
+    private processHttpmsgService: ProcessHttpmsgService) { }
+
+  getPlats(): Observable<Plat[]> {
+    return this.restangular.all('plats').getList();
+  }
+
+  getPlat(id: number): Observable<Plat> {
+    return  this.restangular.one('plats',id).get();
+  }
+
+  getFeaturedPlat(): Observable<Plat> {
+    return this.restangular.all('plats').getList({featured: true})
+      .map(plats => plats[0]);
+  }
+
+  getPlatIds(): Observable<number[]> {
+    return this.getPlats()
+      .map(plats => { return plats.map(plat => plat.id) })
+      .catch(error => { return Observable.of(error); });
+      
+  }
+```
