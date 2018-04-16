@@ -1425,3 +1425,44 @@ import { RestangularModule, Restangular } from 'ngx-restangular';
       
   }
 ```
+### Adding a New Directive
+```javascript
+ng g directive directives/highlight
+```
+Update highlight.directive.ts file as follows:
+```javascript
+import { Directive, ElementRef, Renderer2, HostListener  } from '@angular/core';
+. . .
+
+
+  constructor(private el: ElementRef,
+    private renderer: Renderer2) { }
+
+  @HostListener('mouseenter') onMouseEnter() {
+    this.renderer.addClass(this.el.nativeElement, 'highlight');
+  }
+
+  @HostListener('mouseleave') onMouseLeave() {
+    this.renderer.removeClass(this.el.nativeElement, 'highlight');
+  }
+  
+  . . .
+```
+Open styles.scss and add a new scss class to it as follows:
+```javascript
+$background-pale: #D1C4E9;
+
+ . . .
+ 
+ .highlight {
+  background-color: $background-pale;
+  border: 1px solid $primary-color-dark;
+  z-index: 1;
+  transform: scale(1.01);
+}
+```
+Now open menu.component.html and add the new directive as follows:
+```javascript
+ <mat-grid-tile *ngFor="let plat of plats" [routerLink]="['/detailPlat', plat.id]" appHighlight>
+```
+
