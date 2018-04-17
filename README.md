@@ -1399,8 +1399,6 @@ Open plat.service.ts and update it as follows to make it use ng2-restangular:
 import { RestangularModule, Restangular } from 'ngx-restangular';
 
 . . .
-  constructor(private restangular: Restangular,
-              private processHTTPMsg: ProcessHTTPMsg) { }
   
     constructor(private restangular: Restangular,
     private processHttpmsgService: ProcessHttpmsgService) { }
